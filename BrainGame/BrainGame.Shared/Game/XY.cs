@@ -1,5 +1,8 @@
-﻿namespace BinaryJr
+﻿using System.Diagnostics;
+
+namespace BrainGame.Game
 {
+    [DebuggerDisplay("X: {X}, Y: {Y}")]
     public class XY
     {
         public XY(int x, int y)
@@ -9,10 +12,5 @@
         }
         public int X { get; set; }
         public int Y { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("X: {0}, Y: {1}", X, Y);
-        }
     }
 }

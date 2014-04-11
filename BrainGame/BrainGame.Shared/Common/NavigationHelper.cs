@@ -112,92 +112,34 @@ namespace BrainGame.Common
         RelayCommand _goBackCommand;
         RelayCommand _goForwardCommand;
 
-        /// <summary>
-        /// <see cref="RelayCommand"/> used to bind to the back Button's Command property
-        /// for navigating to the most recent item in back navigation history, if a Frame
-        /// manages its own navigation history.
-        /// 
-        /// The <see cref="RelayCommand"/> is set up to use the virtual method <see cref="GoBack"/>
-        /// as the Execute Action and <see cref="CanGoBack"/> for CanExecute.
-        /// </summary>
         public RelayCommand GoBackCommand
         {
-            get
-            {
-                if (_goBackCommand == null)
-                {
-                    _goBackCommand = new RelayCommand(
-                        () => this.GoBack(),
-                        () => this.CanGoBack());
-                }
-                return _goBackCommand;
-            }
-            set
-            {
-                _goBackCommand = value;
-            }
+            get { return (_goBackCommand ?? (_goBackCommand = new RelayCommand(GoBack, CanGoBack))); }
         }
-        /// <summary>
-        /// <see cref="RelayCommand"/> used for navigating to the most recent item in 
-        /// the forward navigation history, if a Frame manages its own navigation history.
-        /// 
-        /// The <see cref="RelayCommand"/> is set up to use the virtual method <see cref="GoForward"/>
-        /// as the Execute Action and <see cref="CanGoForward"/> for CanExecute.
-        /// </summary>
+
         public RelayCommand GoForwardCommand
         {
-            get
-            {
-                if (_goForwardCommand == null)
-                {
-                    _goForwardCommand = new RelayCommand(
-                        () => this.GoForward(),
-                        () => this.CanGoForward());
-                }
-                return _goForwardCommand;
-            }
+            get { return (_goForwardCommand ?? (_goForwardCommand = new RelayCommand(GoForward, CanGoForward))); }
         }
 
-        /// <summary>
-        /// Virtual method used by the <see cref="GoBackCommand"/> property
-        /// to determine if the <see cref="Frame"/> can go back.
-        /// </summary>
-        /// <returns>
-        /// true if the <see cref="Frame"/> has at least one entry 
-        /// in the back navigation history.
-        /// </returns>
         public virtual bool CanGoBack()
         {
-            return this.Frame != null && this.Frame.CanGoBack;
-        }
-        /// <summary>
-        /// Virtual method used by the <see cref="GoForwardCommand"/> property
-        /// to determine if the <see cref="Frame"/> can go forward.
-        /// </summary>
-        /// <returns>
-        /// true if the <see cref="Frame"/> has at least one entry 
-        /// in the forward navigation history.
-        /// </returns>
-        public virtual bool CanGoForward()
-        {
-            return this.Frame != null && this.Frame.CanGoForward;
+            return Frame != null && Frame.CanGoBack;
         }
 
-        /// <summary>
-        /// Virtual method used by the <see cref="GoBackCommand"/> property
-        /// to invoke the <see cref="Windows.UI.Xaml.Controls.Frame.GoBack"/> method.
-        /// </summary>
+        public virtual bool CanGoForward()
+        {
+            return Frame != null && Frame.CanGoForward;
+        }
+
         public virtual void GoBack()
         {
-            if (this.Frame != null && this.Frame.CanGoBack) this.Frame.GoBack();
+            if (Frame != null && Frame.CanGoBack) Frame.GoBack();
         }
-        /// <summary>
-        /// Virtual method used by the <see cref="GoForwardCommand"/> property
-        /// to invoke the <see cref="Windows.UI.Xaml.Controls.Frame.GoForward"/> method.
-        /// </summary>
+
         public virtual void GoForward()
         {
-            if (this.Frame != null && this.Frame.CanGoForward) this.Frame.GoForward();
+            if (Frame != null && Frame.CanGoForward) Frame.GoForward();
         }
 
 #if WINDOWS_PHONE_APP

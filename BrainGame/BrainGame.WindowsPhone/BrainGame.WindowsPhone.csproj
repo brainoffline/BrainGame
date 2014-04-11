@@ -81,13 +81,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\Brain\Brain.WindowsPhone\Brain.WindowsPhone.csproj">
-      <Project>{3a6acd93-9bd1-4fb3-86c1-bf02e116fb7c}</Project>
-      <Name>Brain.WindowsPhone</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +141,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AnimationManager.portable">
+      <HintPath>..\..\packages\AnimationManager.0.5.0.75\lib\portable-win8+wpa81\AnimationManager.portable.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.2\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -159,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Brain\Brain.Lib\Brain.Lib.csproj">
+      <Project>{537b1376-16ff-4579-b29c-a73f83da69ec}</Project>
+      <Name>Brain.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

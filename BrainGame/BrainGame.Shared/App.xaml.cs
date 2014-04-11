@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Brain.Animate;
 using BrainGame.Common;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -113,6 +114,8 @@ namespace BrainGame
                     throw new Exception("Failed to create initial page");
                 }
             }
+
+            AnimationManager.RegisterSplashScreen(e.SplashScreen);
 
             // Ensure the current window is active
             Window.Current.Activate();

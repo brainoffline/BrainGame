@@ -15,12 +15,28 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)BinaryControl.xaml.cs">
+      <DependentUpon>BinaryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TileControl.xaml.cs">
+      <DependentUpon>TileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitionSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\BinaryGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\BinaryGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\GameData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\SavedGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\TileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\XY.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SwapRightOutAnimation.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationIconTransparent.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationIconTransparentLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitions.json" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
@@ -30,5 +46,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)BinaryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\TileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

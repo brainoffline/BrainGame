@@ -1,6 +1,6 @@
 ﻿using PropertyChanged;
 
-namespace BinaryJr
+namespace BrainGame.Game
 {
     [ImplementPropertyChanged]
     public class GameData
@@ -10,7 +10,6 @@ namespace BinaryJr
 
         public int MoveCount { get; set; }
         public int GameCount { get; set; }
-        public bool HasDonated { get; set; }
 
         public void Reset()
         {

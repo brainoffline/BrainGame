@@ -104,13 +104,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\Brain\Brain.Windows\Brain.Windows.csproj">
-      <Project>{44e99044-c893-41cb-95d9-a4de2d312ceb}</Project>
-      <Name>Brain.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
     </Compile>
@@ -193,6 +186,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AnimationManager.portable">
+      <HintPath>..\..\packages\AnimationManager.0.5.0.76\lib\portable-win8+wpa81\AnimationManager.portable.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleAnalytics">
       <HintPath>..\..\packages\GoogleAnalyticsSDK.1.2.01\lib\windows81\GoogleAnalytics.winmd</HintPath>
     </Reference>
@@ -207,6 +203,12 @@
       <HintPath>..\..\packages\PropertyChanged.Fody.1.48.1.0\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Brain\Brain.Lib\Brain.Lib.csproj">
+      <Project>{537b1376-16ff-4579-b29c-a73f83da69ec}</Project>
+      <Name>Brain.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

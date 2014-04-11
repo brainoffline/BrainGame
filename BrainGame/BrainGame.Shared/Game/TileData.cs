@@ -1,6 +1,5 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using BinaryJr;
 using Newtonsoft.Json;
 using PropertyChanged;
 
