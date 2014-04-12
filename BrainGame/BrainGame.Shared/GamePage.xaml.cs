@@ -235,6 +235,12 @@ namespace BrainGame
             AllGamesOver = false;
         }
 
+        private void RestartButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            PlayButton_Click(sender, null);
+        }
+
+
         public int TotalScore { get; set; }
         public int BestScore { get; set; }
 
@@ -246,5 +252,6 @@ namespace BrainGame
         public string AchievementText { get; set; }
 
         public string Rank { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using Brain.Utils;
 using BrainGame.DataModel;
 using Newtonsoft.Json;
 using PropertyChanged;
@@ -9,14 +10,16 @@ namespace BrainGame.Game
     [ImplementPropertyChanged]
     public class TileData
     {
+        private GameDefinition _gameDefinition;
+
         public TileData(XY pos, int value, GameDefinition gameDefinition)
         {
             Pos = pos;
             Value = value;
-            this.gameDefinition = gameDefinition;
+            GameDefinition = gameDefinition;
         }
 
-        private GameDefinition gameDefinition;
+        public GameDefinition GameDefinition { get; set; }
 
         [AlsoNotifyFor("BackgroundBrush", "ForegroundBrush", "DisplayValue")]
         public int Value { get; set; }
@@ -25,7 +28,7 @@ namespace BrainGame.Game
         {
             get
             {
-                if (gameDefinition.Style == "ABC")
+                if (GameDefinition.Style == "ABC")
                 {
                     switch (Value)
                     {

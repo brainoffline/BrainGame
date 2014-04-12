@@ -211,7 +211,7 @@ namespace BrainGame
                 {
                     for (int y = 0; y < Game.GameDefinition.Height; y++)
                     {
-                        Game.RestoreTile(savedGame.BinaryGrid1.Tiles[x, y]);
+                        Game.RestoreTile(savedGame.BinaryGrid1.Tiles[x, y], Game.GameDefinition);
                     }
                 }
             }

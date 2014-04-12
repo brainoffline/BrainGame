@@ -8,6 +8,10 @@
 
     <Style x:Key="BackButtonNormalStyle" TargetType="Button"/>
     <Style x:Key="BackButtonSmallStyle" TargetType="Button"/>
+    
+    <Style x:Key="MinimisedCommandBar" TargetType="CommandBar">
+        <Setter Property="ClosedDisplayMode" Value="Minimal"/>
+    </Style>
 
     <Thickness x:Key="GameMargin">12,0,12,12</Thickness>
 

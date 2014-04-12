@@ -9,7 +9,9 @@
     <Style x:Key="BackButtonSmallStyle" TargetType="Button" BasedOn="{StaticResource NavigationBackButtonSmallStyle}">
         <Setter Property="Margin" Value="9,59,9,0"/>
     </Style>
-    
+
+    <Style x:Key="MinimisedCommandBar" TargetType="CommandBar"/>
+
     <Thickness x:Key="GameMargin">40,0,40,40</Thickness>
     
 </ResourceDictionary>

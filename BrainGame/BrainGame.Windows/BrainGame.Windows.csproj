@@ -18,6 +18,8 @@
     <PackageCertificateKeyFile>BrainGame.Windows_StoreKey.pfx</PackageCertificateKeyFile>
     <NuGetPackageImportStamp>57516bff</NuGetPackageImportStamp>
     <PackageCertificateThumbprint>4A588E9DE2247BB5B2E5DCE68A8C4E5152D3223E</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

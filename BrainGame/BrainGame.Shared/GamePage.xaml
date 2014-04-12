@@ -10,6 +10,14 @@
     xmlns:controls="using:Brain.Controls"
     mc:Ignorable="d"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    
+	<brainGame:BasePage.BottomAppBar>
+        <CommandBar Style="{StaticResource MinimisedCommandBar}" Background="#7F000000">
+			<CommandBar.SecondaryCommands>
+				<AppBarButton Icon="Refresh" Label="Restart" Click="RestartButton_Click"/>
+			</CommandBar.SecondaryCommands>
+		</CommandBar>
+	</brainGame:BasePage.BottomAppBar>
 
     <Grid >
         

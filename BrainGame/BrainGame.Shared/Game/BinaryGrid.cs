@@ -13,15 +13,31 @@ namespace BrainGame.Game
         {
             this.gameDefinition = gameDefinition;
 
-            Width = gameDefinition.Width;
-            Height = gameDefinition.Height;
-            Tiles = new TileData[gameDefinition.Width, gameDefinition.Height];
+            if (gameDefinition != null)
+            {
+                Width = gameDefinition.Width;
+                Height = gameDefinition.Height;
+                Tiles = new TileData[gameDefinition.Width, gameDefinition.Height];
+                DefinitionUniqueId = gameDefinition.UniqueId;
+            }
         }
 
         private GameDefinition gameDefinition;
+        private string _definitionUniqueId;
         public TileData[,] Tiles { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+
+        public string DefinitionUniqueId
+        {
+            get { return _definitionUniqueId; }
+            set
+            {
+                _definitionUniqueId = value;
+                if (gameDefinition == null)
+                    gameDefinition = AsyncHelper.RunSync(() => GameDefinitionSource.GetGameDefinition(value));
+            }
+        }
 
         public void ForEachTile(Action<TileData> action)
         {

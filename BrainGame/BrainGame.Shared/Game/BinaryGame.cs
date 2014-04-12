@@ -74,10 +74,11 @@ namespace BrainGame.Game
             }
         }
 
-        public void RestoreTile(TileData tile)
+        public void RestoreTile(TileData tile, GameDefinition gameDefinition)
         {
             if (tile == null) return;
 
+            tile.GameDefinition = gameDefinition;
             BinaryGrid.InsertTile(tile);
             RaiseTileAdded(tile);
         }
