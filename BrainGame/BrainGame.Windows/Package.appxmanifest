@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="BrainGame" Publisher="CN=Brian" Version="1.0.0.0" />
+  <Identity Name="23236DrDevelop.Binary" Publisher="CN=2C5181F2-C30F-4EA0-A676-61DC3C764E8B" Version="1.1.0.0" />
   <Properties>
-    <DisplayName>Brain Game</DisplayName>
-    <PublisherDisplayName>Brian</PublisherDisplayName>
+    <DisplayName>binary</DisplayName>
+    <PublisherDisplayName>BrainOffline</PublisherDisplayName>
     <Logo>Assets\Logos\LogoStore.png</Logo>
   </Properties>
   <Prerequisites>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BrainGame.Windows.App">
-      <m2:VisualElements DisplayName="Brain Game" Square150x150Logo="Assets\Logos\Logo150.png" Square30x30Logo="Assets\Logos\Logo030.png" Description="Brain Game" ForegroundText="light" BackgroundColor="#000000">
+      <m2:VisualElements DisplayName="binary" Square150x150Logo="Assets\Logos\Logo150.png" Square30x30Logo="Assets\Logos\Logo030.png" Description="binary" ForegroundText="light" BackgroundColor="#000000">
         <m2:DefaultTile Square70x70Logo="Assets\Logos\Logo070.png" Square310x310Logo="Assets\Logos\Logo310.png" Wide310x150Logo="Assets\Logos\WideLogo310.png">
         </m2:DefaultTile>
         <m2:SplashScreen Image="Assets\Logos\SplashScreen.png" BackgroundColor="#000000" />

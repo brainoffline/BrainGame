@@ -15,8 +15,9 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
-    <PackageCertificateKeyFile>BrainGame.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>BrainGame.Windows_StoreKey.pfx</PackageCertificateKeyFile>
     <NuGetPackageImportStamp>57516bff</NuGetPackageImportStamp>
+    <PackageCertificateThumbprint>4A588E9DE2247BB5B2E5DCE68A8C4E5152D3223E</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -116,12 +117,12 @@
     <None Include="analytics.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="BrainGame.Windows_StoreKey.pfx" />
     <None Include="BrainGame.Windows_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="analytics.xml" />
-    <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\Logos\Logo.16.png" />
     <Content Include="Assets\Logos\Logo.256.png" />
     <Content Include="Assets\Logos\Logo.32.png" />
@@ -160,6 +161,7 @@
     <Content Include="Assets\Logos\WideLogo310.scale-180.png" />
     <Content Include="Assets\Logos\WideLogo310.scale-80.png" />
     <Content Include="FodyWeavers.xml" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="HubPage.xaml">

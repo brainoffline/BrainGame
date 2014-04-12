@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="cc55208c-ce8a-4d96-853c-b1edb9c7bef5" Publisher="CN=Brian" Version="1.0.0.0" />
+  <Identity Name="cc55208c-ce8a-4d96-853c-b1edb9c7bef5" Publisher="CN=Brian" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="cc55208c-ce8a-4d96-853c-b1edb9c7bef5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>BrainGame.WindowsPhone</DisplayName>
-    <PublisherDisplayName>Brian</PublisherDisplayName>
+    <DisplayName>binary</DisplayName>
+    <PublisherDisplayName>BrainOffline</PublisherDisplayName>
     <Logo>Assets\Logos\LogoStore.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BrainGame.WindowsPhone.App">
-      <m3:VisualElements DisplayName="Brain Game" Square150x150Logo="Assets\Logos\Logo150.png" Square44x44Logo="Assets\Logos\Logo044.png" Description="Brain Game" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="binary" Square150x150Logo="Assets\Logos\Logo150.png" Square44x44Logo="Assets\Logos\Logo044.png" Description="binary" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\Logos\LogoWide.png" Square71x71Logo="Assets\Logos\Logo071.png">
         </m3:DefaultTile>
         <m3:ApplicationView MinWidth="width320" />

@@ -29,8 +29,7 @@
                         Stretch="UniformToFill" HorizontalAlignment="Left"/>
 
                     <TextBlock 
-                        x:Uid="Header" 
-                        Text="Brain Game" 
+                        Text="binary" 
                         Style="{StaticResource HeaderTextBlockStyle}" 
                         Grid.Column="1" VerticalAlignment="Center" Margin="12,0" />
                 </Grid>
