@@ -15,8 +15,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)BinaryControl.xaml.cs">
-      <DependentUpon>BinaryControl.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)BasePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BrainGameControl.xaml.cs">
+      <DependentUpon>BrainGameControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TileControl.xaml.cs">
       <DependentUpon>TileControl.xaml</DependentUpon>
@@ -48,7 +49,7 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)BinaryControl.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)BrainGameControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

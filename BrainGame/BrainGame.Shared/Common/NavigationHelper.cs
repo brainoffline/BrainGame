@@ -208,14 +208,13 @@ namespace BrainGame.Common
         /// </summary>
         /// <param name="sender">Instance that triggered the event.</param>
         /// <param name="e">Event data describing the conditions that led to the event.</param>
-        private void CoreWindow_PointerPressed(CoreWindow sender,
-            PointerEventArgs e)
+        private void CoreWindow_PointerPressed(CoreWindow sender, PointerEventArgs e)
         {
             var properties = e.CurrentPoint.Properties;
 
             // Ignore button chords with the left, right, and middle buttons
-            if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
-                properties.IsMiddleButtonPressed) return;
+            if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed || properties.IsMiddleButtonPressed) 
+                return;
 
             // If back or foward are pressed (but not both) navigate appropriately
             bool backPressed = properties.IsXButton1Pressed;

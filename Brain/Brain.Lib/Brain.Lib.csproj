@@ -52,8 +52,7 @@
     <Compile Include="Services\INetworkService.cs" />
     <Compile Include="Services\NetworkService.cs" />
     <Compile Include="Storage\DataStorage.cs" />
-    <Compile Include="Storage\IDataStorage.cs" />
-    <Compile Include="Storage\ISimpleStorage.cs" />
+    <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\SimpleStorage.cs" />
     <Compile Include="Utils\AsyncHelper.cs" />
     <Compile Include="Utils\Execute.cs" />

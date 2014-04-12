@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Brain.Storage
 {
-    public class DataStorage : IDataStorage
+    public class DataStorage : IStorage
     {
         public T Get<T>(string key)
         {
@@ -40,12 +40,12 @@ namespace Brain.Storage
             }
         }
 
-        public void Save<T>(T value, string key)
+        public void Set<T>(T value, string key)
         {
-            AsyncHelper.RunSync(() => SaveAsync(value, key));
+            AsyncHelper.RunSync(() => SetAsync(value, key));
         }
 
-        public async Task SaveAsync<T>(T value, string key)
+        public async Task SetAsync<T>(T value, string key)
         {
             var folder = ApplicationData.Current.RoamingFolder;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Brain.Utils;
+using BrainGame.DataModel;
 using PropertyChanged;
 
 namespace BrainGame.Game
@@ -16,14 +17,16 @@ namespace BrainGame.Game
     {
         private const int StartTiles = 2;
 
-        public BinaryGame(int width = 4, int height = 4)
+        public BinaryGame(GameDefinition gameDefinition)
         {
-            BinaryGrid = new BinaryGrid(width, height);
+            GameDefinition = gameDefinition;
+            BinaryGrid = new BinaryGrid(gameDefinition.Width, gameDefinition.Height);
         }
 
         public void Setup()
         {
             Score = 0;
+            Moves = 0;
             IsGameOver = false;
 
             GameData.GameCount++;
@@ -33,7 +36,26 @@ namespace BrainGame.Game
             AddStartTiles();
         }
 
+        public static string GetRank(int value)
+        {
+            switch (value)
+            {
+                default:
+                    return "Unranked";
+                case 16: return "Beginner";
+                case 32: return "Rookie";
+                case 64: return "Novice";
+                case 128: return "Amateur";
+                case 256: return "Skilled";
+                case 512: return "Profesional";
+                case 1024: return "Expert";
+                case 2048: return "Ninja";
+            }
+        }
+
+
         public int Score { get; set; }
+        public int Moves { get; set; }
 
         private void AddStartTiles()
         {
@@ -103,10 +125,11 @@ namespace BrainGame.Game
 
                             tile.MergedFrom = nextTile;
                             tile.Value *= 2;
-                            BinaryGrid.MoveTile(tile, nextPos);
-                            RaiseTileMoved(tile);
 
                             Score += tile.Value;
+
+                            BinaryGrid.MoveTile(tile, nextPos);
+                            RaiseTileMoved(tile);
 
                             if (tile.Value >= 2048)
                             {
@@ -131,6 +154,7 @@ namespace BrainGame.Game
 
             if (moved)
             {
+                Moves++;
                 GameData.MoveCount++;
 
                 AddRandomTile();
@@ -163,7 +187,7 @@ namespace BrainGame.Game
 
             for (int x = 0; x < BinaryGrid.Width; x++)
                 Xs.Add(x);
-            for (int y = 0; y < BinaryGrid.Width; y++)
+            for (int y = 0; y < BinaryGrid.Height; y++)
                 Ys.Add(y);
 
             if (vector.X == 1)
@@ -261,6 +285,7 @@ namespace BrainGame.Game
         public bool IsGameOver { get; set; }
         public bool HasGameWon { get; set; }
 
+        public GameDefinition GameDefinition { get; set; }
         public BinaryGrid BinaryGrid { get; private set; }
         public GameData GameData { get; set; }
 

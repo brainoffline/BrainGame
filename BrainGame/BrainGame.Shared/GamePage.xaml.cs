@@ -2,27 +2,19 @@
 
 // Windows phone not ready yet
 #define GOOGLE_ANALYTICS
-
 using GoogleAnalytics;
 #endif
 
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using Windows.ApplicationModel.Store;
-using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Brain.Animate;
-using Brain.Storage;
 using Brain.Utils;
-using BrainGame.Controls;
+using BrainGame.DataModel;
 using BrainGame.Game;
 using PropertyChanged;
 
@@ -32,75 +24,46 @@ namespace BrainGame
     [ImplementPropertyChanged]
     public partial class GamePage 
     {
-        private const int TileWidth = 70;
-        private const int TileHeight = 70;
-
-        private const int GameWidth = 3;
-        private const int GameHeight = 3;
-
         public GamePage()
         {
             InitializeComponent();
 
-            ShowShare = false;
-
-            Game1 = new BinaryGame(GameWidth, GameHeight);
-            Game1.TileMoved += GameOnTileMoved;
-            Game1.GameWon += GameOnGameWon;
-            Game1.GameOver += GameOnGameOver;
-
-            bc.Game = Game1;
-            bc.Build();
-
-            DonationText = "Donate";
+#if WINDOWS_APP
+            SizeChanged += (sender, args) =>
+            {
+                if (pageRoot.ActualWidth < 500)
+                    BackButton.Style = Application.Current.Resources["BackButtonSmallStyle"] as Style;
+                else
+                    BackButton.Style = Application.Current.Resources["BackButtonNormalStyle"] as Style;
+            };
+#endif
         }
-
-        public int TotalScore { get; set; }
-        public bool AllGamesOver { get; set; }
 
         private void GameOnTileMoved(object sender, TileData tileData)
         {
             TotalScore = bc.Game.Score;
-            if (TotalScore > GameData.BestScore)
-                GameData.BestScore = TotalScore;
-
-            if (tileData.Value > GameData.BestPiece)
-                Achievement(tileData.Value);
+            BestScore = bc.Game.GameData.BestScore;
         }
 
-        public void Achievement(int value)
+        private void GameOnNewAchievement(object sender, int value)
         {
-            GameData.BestPiece = value;
-            SaveData();
-
-            if (GameData.BestPiece > 8)
+            if (value > 8)
             {
-                Rank = GetRank(GameData.BestPiece);
-                ShowAchievement(GetRank(value), "NEW ACHIEVEMENT", true);
+                Rank = BinaryGame.GetRank(bc.Game.GameData.BestPiece);
+                ShowAchievement(Rank, "NEW ACHIEVEMENT", true);
             }
         }
 
-        private string GetRank(int value)
+        private void GameOnNewHighScore(object sender, int score)
         {
-            switch (value)
-            {
-                default:
-                    return "Unranked";
-                case 16: return "Beginner";
-                case 32: return "Rookie";
-                case 64: return "Novice";
-                case 128: return "Amateur";
-                case 256: return "Skilled";
-                case 512: return "Profesional";
-                case 1024: return "Expert";
-                case 2048: return "Ninja";
-            }
+            BestScore = score;
         }
+
 
         private async void ShowAchievement(string content, string title = null, bool showTrophy = false)
         {
             ShowTrophy = showTrophy;
-            AchievementTitle = title;// ?? "NEW ACHIEVEMENT";
+            AchievementTitle = title;
             AchievementText = content;
 
             await AchievementBalloon.AnimateAsync(new BounceInUpAnimation());
@@ -124,9 +87,9 @@ namespace BrainGame
 
 #if GOOGLE_ANALYTICS
             EasyTracker.GetTracker().SendEvent("GameOver", "Score", null, TotalScore);
-            EasyTracker.GetTracker().SendEvent("GameOver", "Swipes", null, swipes);
-            if (TotalScore == GameData.BestScore)
-                EasyTracker.GetTracker().SendEvent("BestScore", "BestScore", null, GameData.BestScore);
+            EasyTracker.GetTracker().SendEvent("GameOver", "Moves", null, bc.Game.Moves);
+            if (TotalScore == bc.Game.GameData.BestScore)
+                EasyTracker.GetTracker().SendEvent("BestScore", "BestScore", null, bc.Game.GameData.BestScore);
 #endif
 
             ShowShare = true;
@@ -135,16 +98,33 @@ namespace BrainGame
             PlayButton.IsHitTestVisible = true;
             PlayButton.AnimateAsync(new BounceInUpAnimation());
 
-            SaveData();
+            bc.SaveData();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
+            if (bc.Game == null)
+            {
+                var gameDefinition = (GameDefinition) e.Parameter;
+                if (gameDefinition == null) return;
+
+                bc.Build(gameDefinition);
+
+                bc.Game.TileMoved += GameOnTileMoved;
+                bc.NewHighScore += GameOnNewHighScore;
+                bc.NewAchievement += GameOnNewAchievement;
+                bc.Game.GameWon += GameOnGameWon;
+                bc.Game.GameOver += GameOnGameOver;
+            }
+
             if (TotalScore == 0)
-                LoadData();
-            Rank = GetRank(GameData.BestPiece);
+            {
+                bc.LoadData();
+                TotalScore = bc.Game.Score;
+            }
+            Rank = BinaryGame.GetRank(bc.Game.GameData.BestPiece);
 
 #if GOOGLE_ANALYTICS
             EasyTracker.GetTracker().SendView("Main");
@@ -152,8 +132,8 @@ namespace BrainGame
 
             if (TotalScore == 0)
             {
-                PlayGrid.AnimateAsync(new FadeInAnimation { Delay = 1.8 });
-                PlayButton.AnimateAsync(new BounceInUpAnimation { Delay = 1.8 });
+                PlayGrid.AnimateAsync(new FadeInAnimation { Delay = 0.3 });
+                PlayButton.AnimateAsync(new BounceInUpAnimation { Delay = 0.4 });
 
                 PlayGrid.IsHitTestVisible = true;
                 PlayButton.IsHitTestVisible = true;
@@ -172,69 +152,10 @@ namespace BrainGame
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             Window.Current.CoreWindow.KeyUp -= CoreWindow_KeyUp;
-            SaveData();
+            bc.SaveData();
 
             base.OnNavigatedFrom(e);
         }
-
-        private void LoadData()
-        {
-            GameData = storage.GetSettings<GameData>("GameData") ?? new GameData();
-            Game1.GameData = GameData;
-
-            var savedGame = storage.GetSettings<SavedGame>("SavedGame");
-            if (savedGame != null)
-            {
-                Game1.Score = savedGame.Score1;
-
-                for (int x = 0; x < GameWidth; x++)
-                {
-                    for (int y = 0; y < GameHeight; y++)
-                    {
-                        Game1.RestoreTile(savedGame.BinaryGrid1.Tiles[x, y]);
-                    }
-                }
-
-                TotalScore = bc.Game.Score;
-
-                //SimpleSettings.DeleteSetting("SavedGame");
-            }
-        }
-
-        private void SaveData()
-        {
-            storage.SaveSettings(GameData, "GameData");
-
-            if (!AllGamesOver && TotalScore > 0)
-            {
-                var savedGame = new SavedGame
-                {
-                    Score1 = Game1.Score,
-                    BinaryGrid1 = Game1.BinaryGrid,
-                };
-                storage.SaveSettings(savedGame, "SavedGame");
-            }
-            else
-                storage.DeleteSetting("SavedGame");
-        }
-
-        private async Task TileMove(TileControl tile, int x, int y, bool hasMerged)
-        {
-            var width = (tile.ActualWidth <= 0) ? TileWidth : tile.ActualWidth;
-            var height = (tile.ActualHeight <= 0) ? TileHeight : tile.ActualHeight;
-
-            if (hasMerged)
-            {
-                await Task.WhenAll(new Task[]
-                {
-                    tile.MoveToAsync(0.3, new Point(x*width, y*height), new BackEase {Amplitude = 0.4}),
-                    tile.AnimateAsync(new PulseAnimation {Duration = 0.4})
-                });
-            }
-            else
-                await tile.MoveToAsync(0.3, new Point(x * width, y * height), new BackEase { Amplitude = 0.4 });
-        }
-
 
 
         private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
@@ -273,34 +194,14 @@ namespace BrainGame
 
         private void Move(MoveType moveType)
         {
-            swipes++;
-            Game1.Move(moveType);
+            bc.Game.Move(moveType);
         }
 
 
-        public BinaryGame Game1 { get; set; }
-        public GameData GameData { get; set; }
-
-
-        //public string GameMessage { get; set; }
-        public bool ShowShare { get; set; }
-        private int swipes;
-        //public bool IsPaused { get; set; }
-
-        public bool ShowTrophy { get; set; }
-        public string AchievementTitle { get; set; }
-        public string AchievementText { get; set; }
-
-        public string DonationAmount { get; set; }
-        public string DonationText { get; set; }
-
-        public string Rank { get; set; }
-
-        private ISimpleStorage storage = new SimpleStorage();
 
         private async void ShareButton_Click(object sender, RoutedEventArgs e)
         {
-            var message = string.Format("OMG! I just scored {0} in Binary Squared. (Rank: {1}) #BrainOffline #BinarySquared",
+            var message = string.Format("OMG! I just scored {0} in BrainGame. (Rank: {1}) #BrainOffline #BrainGame",
                 TotalScore, Rank);
 
             await MessageBox.ShowAsync("TODO: Share link");
@@ -321,29 +222,27 @@ namespace BrainGame
             await PlayGrid.AnimateAsync(new FadeOutAnimation());
             PlayGrid.IsHitTestVisible = false;
 
-            /*
-            if (IsPaused)
-            {
-                IsPaused = false;
-            }
-            else
-             */
-            {
-                //GameMessage = "Swipe any direction to move tiles";
-                //ShowAchievement("Swipe in any direction to move tiles");
-                swipes = 0;
-
 #if GOOGLE_ANALYTICS
-                EasyTracker.GetTracker().SendEvent("GameStart", "Start", null, 0);
+            EasyTracker.GetTracker().SendEvent("GameStart", "Start", null, 0);
 #endif
 
-                await bc.Clear();
-                Game1.Setup();
+            await bc.Clear();
+            bc.Game.Setup();
 
-                TotalScore = 0;
-                AllGamesOver = false;
-            }
+            TotalScore = 0;
+            AllGamesOver = false;
         }
 
+        public int TotalScore { get; set; }
+        public int BestScore { get; set; }
+
+        public bool AllGamesOver { get; set; }
+        public bool ShowShare { get; set; }
+
+        public bool ShowTrophy { get; set; }
+        public string AchievementTitle { get; set; }
+        public string AchievementText { get; set; }
+
+        public string Rank { get; set; }
     }
 }

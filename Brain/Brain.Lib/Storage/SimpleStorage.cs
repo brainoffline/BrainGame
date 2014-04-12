@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Brain.Storage
 {
-    public class SimpleStorage : ISimpleStorage
+    public class SimpleStorage : IStorage
     {
-        public T GetSettings<T>(string name)
+        public T Get<T>(string name)
         {
             var values = ApplicationData.Current.RoamingSettings.Values;
             if (values.ContainsKey(name))
@@ -16,13 +16,13 @@ namespace Brain.Storage
             return default(T);
         }
 
-        public void SaveSettings<T>(T settings, string name)
+        public void Set<T>(T settings, string name)
         {
             var json = JsonConvert.SerializeObject(settings);
             ApplicationData.Current.RoamingSettings.Values[name] = json;
         }
 
-        public void DeleteSetting(string name)
+        public void Delete(string name)
         {
             ApplicationData.Current.RoamingSettings.Values.Remove(name);
         }

@@ -7,16 +7,21 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Brain.Animate;
+using Brain.Storage;
 using BrainGame.Controls;
+using BrainGame.DataModel;
 using BrainGame.Game;
 using PropertyChanged;
 
 namespace BrainGame
 {
     [ImplementPropertyChanged]
-    public partial class BinaryControl
+    public partial class BrainGameControl
     {
-        public BinaryControl()
+        private const int DefaultTileWidth = 30;
+        private const int DefaultTileHeight = 30;
+
+        public BrainGameControl()
         {
             InitializeComponent();
 
@@ -28,7 +33,7 @@ namespace BrainGame
             get
             {
                 if (GameCanvas.ActualWidth <= 0)
-                    return 70;
+                    return DefaultTileWidth;
                 return GameCanvas.ActualWidth/Game.BinaryGrid.Width;
             }
         }
@@ -38,7 +43,7 @@ namespace BrainGame
             get
             {
                 if (GameCanvas.ActualHeight <= 0)
-                    return 70;
+                    return DefaultTileHeight;
                 return GameCanvas.ActualHeight / Game.BinaryGrid.Height;
             }
         }
@@ -84,6 +89,19 @@ namespace BrainGame
                 Canvas.SetZIndex(tileControl, tileData.Value);
                 await TileMove(tileControl, tileData.Pos.X, tileData.Pos.Y, hasMerged);
             }
+
+            if (Game.Score > Game.GameData.BestScore)
+            {
+                Game.GameData.BestScore = Game.Score;
+                RaiseNewHighScore(Game.Score);
+            }
+
+            if (tileData.Value > Game.GameData.BestPiece)
+            {
+                Game.GameData.BestPiece = tileData.Value;
+                RaiseNewAchievement(tileData.Value);
+                SaveData();
+            }
         }
 
         private async void GameOnTileRemoved(object sender, TileData tileData)
@@ -107,19 +125,19 @@ namespace BrainGame
 
         private async Task TileMove(TileControl tile, int x, int y, bool hasMerged)
         {
-            var width = (tile.ActualWidth <= 0) ? TileWidth : tile.ActualWidth;
-            var height = (tile.ActualHeight <= 0) ? TileHeight : tile.ActualHeight;
+            //var width = (tile.ActualWidth == DefaultTileWidth) ? TileWidth : tile.ActualWidth;
+            //var height = (tile.ActualHeight <= 0) ? TileHeight : tile.ActualHeight;
 
             if (hasMerged)
             {
                 await Task.WhenAll(new Task[]
                 {
-                    tile.MoveToAsync(0.3, new Point(x*width, y*height), new BackEase {Amplitude = 0.4}),
+                    tile.MoveToAsync(0.3, new Point(x*TileWidth, y*TileHeight), new BackEase {Amplitude = 0.4}),
                     tile.AnimateAsync(new PulseAnimation {Duration = 0.4})
                 });
             }
             else
-                await tile.MoveToAsync(0.3, new Point(x * width, y * height), new BackEase { Amplitude = 0.4 });
+                await tile.MoveToAsync(0.3, new Point(x * TileWidth, y * TileHeight), new BackEase { Amplitude = 0.4 });
         }
 
         private TileControl FindTile(TileData tile)
@@ -127,8 +145,10 @@ namespace BrainGame
             return GameCanvas.Children.OfType<TileControl>().First(x => x.TileData == tile);
         }
 
-        public void Build()
+        public void Build(GameDefinition gameDefinition)
         {
+            Game = new BinaryGame(gameDefinition);
+
             TileBackgroundGrid.RowDefinitions.Clear();
             TileBackgroundGrid.ColumnDefinitions.Clear();
 
@@ -176,6 +196,62 @@ namespace BrainGame
                 GameCanvas.Children.Remove(tileControl);
 
         }
+
+        public void LoadData()
+        {
+            var GameData = storage.Get<GameData>("GameData." + Game.GameDefinition.UniqueId) ?? new GameData();
+            Game.GameData = GameData;
+
+            var savedGame = storage.Get<SavedGame>("SavedGame." + Game.GameDefinition.UniqueId);
+            if (savedGame != null)
+            {
+                Game.Score = savedGame.Score1;
+
+                for (int x = 0; x < Game.GameDefinition.Width; x++)
+                {
+                    for (int y = 0; y < Game.GameDefinition.Height; y++)
+                    {
+                        Game.RestoreTile(savedGame.BinaryGrid1.Tiles[x, y]);
+                    }
+                }
+            }
+        }
+
+        public void SaveData()
+        {
+            storage.Set(Game.GameData, "GameData." + Game.GameDefinition.UniqueId);
+
+            if (!Game.IsGameOver && Game.Score > 0)
+            {
+                var savedGame = new SavedGame
+                {
+                    Score1 = Game.Score,
+                    BinaryGrid1 = Game.BinaryGrid,
+                };
+                storage.Set(savedGame, "SavedGame." + Game.GameDefinition.UniqueId);
+            }
+            else
+                storage.Delete("SavedGame." + Game.GameDefinition.UniqueId);
+        }
+
+
+
+
+        public event EventHandler<int> NewHighScore;
+        protected virtual void RaiseNewHighScore(int highScore)
+        {
+            EventHandler<int> handler = NewHighScore;
+            if (handler != null) handler(this, highScore);
+        }
+
+        public event EventHandler<int> NewAchievement;
+        protected virtual void RaiseNewAchievement(int achievement)
+        {
+            EventHandler<int> handler = NewAchievement;
+            if (handler != null) handler(this, achievement);
+        }
+
+        private IStorage storage = new DataStorage();
 
     }
 }
