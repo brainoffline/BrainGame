@@ -49,5 +49,21 @@
 		"Width":3,
 		"Height":4,
 	},
+	{
+		"UniqueId":"ReallyTall",
+		"Title":"Really Tall",
+		"Description":"2048 for vertical thinkers",
+		"ImagePath":"Assets/ReallyTall.png",
+		"Width":2,
+		"Height":6,
+	},
+	{
+		"UniqueId":"ReallyWide",
+		"Title":"Really Wide",
+		"Description":"2048 for horizontal thinkers",
+		"ImagePath":"Assets/ReallyWide.png",
+		"Width":6,
+		"Height":2,
+	},
 	]
 }

@@ -18,39 +18,25 @@
 
         <Hub>
             <Hub.Header>
-                <Grid>
+                <Grid Margin="0,32,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button 
-                        Visibility="{Binding IsWindowsApp, Converter={StaticResource VisibilityConverter}}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        Width="80"
-                        VerticalAlignment="Top"
-                        Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"/>
+                    <Image 
+                        Source="/Assets/Logos/Logo150.png" 
+                        Height="80" 
+                        Stretch="UniformToFill" HorizontalAlignment="Left"/>
 
                     <TextBlock 
                         x:Uid="Header" 
                         Text="Brain Game" 
-                        Margin="20,10,0,0"
                         Style="{StaticResource HeaderTextBlockStyle}" 
-                        Grid.Column="1" VerticalAlignment="Top" 
-                        />
+                        Grid.Column="1" VerticalAlignment="Center" Margin="12,0" />
                 </Grid>
             </Hub.Header>
 
-            <HubSection Width="320" Margin="0,0,80,0" Background="Black">
-                <DataTemplate>
-                    <Grid Width="240">
-                        <Image 
-                            Source="/Assets/Logos/Logo150.png" 
-                            HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    </Grid>
-                </DataTemplate>
-            </HubSection>
-
-            <HubSection x:Uid="GamesSection" Header="Games" Padding="40,40,40,32">
+            <HubSection MinWidth="480" >
                 <DataTemplate>
                     <GridView
                         x:Name="GamesGridView"
@@ -64,27 +50,20 @@
                         <GridView.ItemTemplate>
                             <DataTemplate>
 
-                                <Grid Width="180">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Border 
-                                        Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
-                                        Height="173" Width="173" Grid.Row="0" HorizontalAlignment="Left">
-                                        
-                                        <Image 
-                                            Source="{Binding ImagePath}" 
-                                            Stretch="UniformToFill" 
-                                            Height="173" Width="173"/>
-                                        
+                                <Grid Width="170" Margin="0,0,12,12">
+                                    <Image 
+                                        Source="{Binding ImagePath}" 
+                                        Stretch="UniformToFill" 
+                                        Height="163" Width="163"/>
+
+                                    <Border VerticalAlignment="Bottom" Background="#BB000000">
+                                        <TextBlock 
+                                            Text="{Binding Title}" 
+                                            Style="{ThemeResource BaseTextBlockStyle}"  FontSize="32"
+                                            Typography.Capitals="SmallCaps" 
+                                            Margin="0,12,0,12" HorizontalAlignment="Center" 
+                                            IsTextScaleFactorEnabled="False"/>
                                     </Border>
-                                    <TextBlock 
-                                        Text="{Binding Title}" 
-                                        Style="{ThemeResource BaseTextBlockStyle}" 
-                                        Typography.Capitals="SmallCaps" 
-                                        Grid.Row="1" Margin="0,12,0,0" 
-                                        IsTextScaleFactorEnabled="False"/>
                                 </Grid>
 
                             </DataTemplate>

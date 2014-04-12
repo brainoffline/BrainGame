@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Brain.Utils;
+using BrainGame.DataModel;
 using PropertyChanged;
 
 namespace BrainGame.Game
@@ -8,13 +9,16 @@ namespace BrainGame.Game
     [ImplementPropertyChanged]
     public class BinaryGrid
     {
-        public BinaryGrid(int width = 4, int height = 4)
+        public BinaryGrid(GameDefinition gameDefinition)
         {
-            Width = width;
-            Height = height;
-            Tiles = new TileData[width, height];
+            this.gameDefinition = gameDefinition;
+
+            Width = gameDefinition.Width;
+            Height = gameDefinition.Height;
+            Tiles = new TileData[gameDefinition.Width, gameDefinition.Height];
         }
 
+        private GameDefinition gameDefinition;
         public TileData[,] Tiles { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -73,7 +77,7 @@ namespace BrainGame.Game
 
         public TileData InsertTile(XY pos, int value)
         {
-            var tile = new TileData(pos, value);
+            var tile = new TileData(pos, value, gameDefinition);
             Tiles[pos.X, pos.Y] = tile;
             return tile;
         }

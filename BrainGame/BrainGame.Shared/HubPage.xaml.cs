@@ -13,12 +13,13 @@ namespace BrainGame
         public void Init()
         {
             Games = new ObservableCollection<GameDefinition>();
-            NavigationHelper.LoadState += async (sender, args) =>
+            Loaded += async (sender, args) =>
             {
+                if (Games.Count > 0) return;
+
                 foreach (var game in await GameDefinitionSource.LoadDataAsync())
                     Games.Add(game);
             };
-
         }
 
         private void GamesGridView_ItemClick(object sender, ItemClickEventArgs e)

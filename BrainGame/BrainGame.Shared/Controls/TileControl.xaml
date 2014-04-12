@@ -17,7 +17,7 @@
 
         <Viewbox StretchDirection="DownOnly">
             <TextBlock
-                Text="{Binding Value}"
+                Text="{Binding DisplayValue}"
                 Visibility="{Binding Value, Converter={StaticResource VisibilityConverter}}"
                 Foreground="{Binding ForegroundBrush}"
                 HorizontalAlignment="Center" VerticalAlignment="Center" 

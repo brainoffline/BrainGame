@@ -123,6 +123,8 @@ namespace BrainGame
             {
                 bc.LoadData();
                 TotalScore = bc.Game.Score;
+                BestScore = bc.Game.GameData.BestScore;
+                Rank = BinaryGame.GetRank(bc.Game.GameData.BestPiece);
             }
             Rank = BinaryGame.GetRank(bc.Game.GameData.BestPiece);
 

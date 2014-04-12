@@ -35,11 +35,14 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)HubPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SwapRightOutAnimation.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\AlphaBeta.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationIconTransparent.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationIconTransparentLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Classic.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Insane.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Jr.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ReallyTall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ReallyWide.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Squash.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Stretch.png" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitions.json" />

@@ -20,7 +20,7 @@ namespace BrainGame.Game
         public BinaryGame(GameDefinition gameDefinition)
         {
             GameDefinition = gameDefinition;
-            BinaryGrid = new BinaryGrid(gameDefinition.Width, gameDefinition.Height);
+            BinaryGrid = new BinaryGrid(gameDefinition);
         }
 
         public void Setup()
@@ -41,7 +41,7 @@ namespace BrainGame.Game
             switch (value)
             {
                 default:
-                    return "Unranked";
+                    return "";
                 case 16: return "Beginner";
                 case 32: return "Rookie";
                 case 64: return "Novice";

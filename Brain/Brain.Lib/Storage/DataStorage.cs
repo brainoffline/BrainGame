@@ -49,9 +49,11 @@ namespace Brain.Storage
         {
             var folder = ApplicationData.Current.RoamingFolder;
 
+            Delete(key);
+
             try
             {
-                var f = await folder.GetItemAsync(key) as StorageFile;
+                var f = await folder.CreateFileAsync(key);
                 if (f == null)
                     return;
 

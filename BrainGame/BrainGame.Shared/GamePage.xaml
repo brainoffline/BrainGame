@@ -164,6 +164,12 @@
 						        Visibility="{Binding BestScore, Converter={StaticResource VisibilityConverter}}"/>
 
                             <TextBlock
+						        Text="{Binding Rank}"
+						        Style="{StaticResource RankText}"
+						        HorizontalAlignment="Right" 
+						        Foreground="{StaticResource SubtleBrush}"
+						        Visibility="{Binding Rank, Converter={StaticResource VisibilityConverter}}"/>
+                            <TextBlock
 						        Text="{Binding BestScore}"
 						        Style="{StaticResource ScoreText}"
 						        HorizontalAlignment="Right" 
