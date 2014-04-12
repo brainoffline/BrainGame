@@ -24,7 +24,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitionSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\BinaryGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\BinaryGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\GameData.cs" />
@@ -34,11 +33,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)HubPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SwapRightOutAnimation.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationIconTransparent.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationIconTransparentLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Classic.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Insane.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Jr.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Squash.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stretch.png" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\GameDefinitions.json" />
-    <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />

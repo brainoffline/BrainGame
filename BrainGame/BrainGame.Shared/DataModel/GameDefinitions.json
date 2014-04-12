@@ -36,7 +36,7 @@
 	{
 		"UniqueId":"Squash",
 		"Title":"Squash",
-		"Description":"2048 for short people",
+		"Description":"2048 for horizontal thinkers",
 		"ImagePath":"Assets/Squash.png",
 		"Width":4,
 		"Height":3,
@@ -44,7 +44,7 @@
 	{
 		"UniqueId":"Tall",
 		"Title":"Stretch",
-		"Description":"2048 for tall people",
+		"Description":"2048 for vertical thinkers",
 		"ImagePath":"Assets/Stretch.png",
 		"Width":3,
 		"Height":4,
