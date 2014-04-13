@@ -3,10 +3,13 @@
 // Windows phone not ready yet
 #define GOOGLE_ANALYTICS
 using GoogleAnalytics;
+
 #endif
 
 using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Store;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -86,10 +89,11 @@ namespace BrainGame
             ShowAchievement("No more moves", "GAME OVER");
 
 #if GOOGLE_ANALYTICS
-            EasyTracker.GetTracker().SendEvent("GameOver", "Score", null, TotalScore);
-            EasyTracker.GetTracker().SendEvent("GameOver", "Moves", null, bc.Game.Moves);
+
+            EasyTracker.GetTracker().SendEvent("GameOver" + bc.Game.GameDefinition.UniqueId, "Score", null, TotalScore);
+            EasyTracker.GetTracker().SendEvent("GameOver" + bc.Game.GameDefinition.UniqueId, "Moves", null, bc.Game.Moves);
             if (TotalScore == bc.Game.GameData.BestScore)
-                EasyTracker.GetTracker().SendEvent("BestScore", "BestScore", null, bc.Game.GameData.BestScore);
+                EasyTracker.GetTracker().SendEvent("BestScore" + bc.Game.GameDefinition.UniqueId, "BestScore", null, bc.Game.GameData.BestScore);
 #endif
 
             ShowShare = true;
@@ -129,7 +133,7 @@ namespace BrainGame
             Rank = BinaryGame.GetRank(bc.Game.GameData.BestPiece);
 
 #if GOOGLE_ANALYTICS
-            EasyTracker.GetTracker().SendView("Main");
+            EasyTracker.GetTracker().SendView("Main" + bc.Game.GameDefinition.UniqueId);
 #endif
 
             if (TotalScore == 0)
@@ -148,11 +152,14 @@ namespace BrainGame
                 PlayButton.IsHitTestVisible = false;
             }
 
+            DataTransferManager.GetForCurrentView().DataRequested += DataTransferManagerOnDataRequested;
+
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            DataTransferManager.GetForCurrentView().DataRequested -= DataTransferManagerOnDataRequested;
             Window.Current.CoreWindow.KeyUp -= CoreWindow_KeyUp;
             bc.SaveData();
 
@@ -201,22 +208,35 @@ namespace BrainGame
 
 
 
-        private async void ShareButton_Click(object sender, RoutedEventArgs e)
+        private string ShareMessage;
+        private void ShareButton_Click(object sender, RoutedEventArgs e)
         {
-            var message = string.Format("OMG! I just scored {0} in BrainGame. (Rank: {1}) #BrainOffline #BrainGame",
-                TotalScore, Rank);
+            ShareMessage = string.Format("OMG! I just scored {0} in Binary {1}. (Rank: {2}) #BrainOffline #Binary",
+                TotalScore, bc.Game.GameDefinition.Title, Rank);
 
-            await MessageBox.ShowAsync("TODO: Share link");
-            /*
-            var task = new ShareLinkTask
-            {
-                Title = "Binary",
-                Message = message,
-                LinkUri = new Uri("http://www.windowsphone.com/s?appid=" + CurrentApp.AppId)
-            };
-            task.Show();
-             */
+            DataTransferManager.ShowShareUI();
         }
+
+        private void DataTransferManagerOnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            var data = args.Request.Data;
+            data.Properties.Title = "binary";
+            data.Properties.Description = "share with the world how awesome you are";
+#if DEBUG
+            var uri = CurrentAppSimulator.LinkUri;
+#else
+            var uri = CurrentApp.LinkUri;
+#endif
+            data.SetApplicationLink(uri);
+
+            if (!string.IsNullOrWhiteSpace(ShareMessage))
+                data.SetText(ShareMessage + "\n" + uri);
+            else
+                data.SetText(string.Format("I am awesome at binary. High Score: {0} (Rank: {1}) #BrainOffline #Binary\n {2}",
+                    bc.Game.GameData.BestScore, Rank, uri));
+        }
+
+
 
 
         private async void PlayButton_Click(object sender, RoutedEventArgs routedEventArgs)
@@ -225,7 +245,7 @@ namespace BrainGame
             PlayGrid.IsHitTestVisible = false;
 
 #if GOOGLE_ANALYTICS
-            EasyTracker.GetTracker().SendEvent("GameStart", "Start", null, 0);
+            EasyTracker.GetTracker().SendEvent("GameStart" + bc.Game.GameDefinition.UniqueId, "Start", null, 0);
 #endif
 
             await bc.Clear();
