@@ -111,7 +111,9 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Description}" Style="{ThemeResource BaseTextBlockStyle}" Typography.Capitals="SmallCaps" />
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Rank}" Style="{StaticResource StatsRankText}"/>
+                                <Viewbox Grid.Column="0" Grid.Row="1" StretchDirection="DownOnly" HorizontalAlignment="Left" Margin="0,0,12,0" >
+                                    <TextBlock Text="{Binding Rank}" Style="{StaticResource StatsRankText}"/>
+                                </Viewbox>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding BestScore}" Style="{StaticResource StatsScoreText}"/>
                             </Grid>
                         </DataTemplate>

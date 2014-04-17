@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BrainGame.Common;
 
@@ -27,6 +30,7 @@ namespace BrainGame
             base.OnNavigatedFrom(e);
             NavigationHelper.OnNavigatedFrom(e);
         }
+
 
 #if WINDOWS_APP
         public bool IsWindowsApp { get { return true; } }

@@ -30,10 +30,12 @@ namespace BrainGame.Controls
         RandomWait,
 
         Swing1,
+        Color1,
+        Jump1,
+
         Rotation1,
         Rotation2,
         Pulse1,
-        Color1,
 
         Exit1,
     }
@@ -93,6 +95,9 @@ namespace BrainGame.Controls
                     break;
                 case BoxtanaAction.Color1:
                     await Color1();
+                    break;
+                case BoxtanaAction.Jump1:
+                    await Jump();
                     break;
             }
         }
@@ -171,6 +176,16 @@ namespace BrainGame.Controls
             var tasks = new Task[]
             {
                 boxtana.AnimateAsync(new RainbowAnimation() ),
+            };
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task Jump()
+        {
+            var tasks = new Task[]
+            {
+                OuterGrid.AnimateAsync(new JumpAnimation { Distance = -40 } ),
+                InnerGrid.AnimateAsync(new JumpAnimation { Distance = -20 } ),
             };
             await Task.WhenAll(tasks);
         }

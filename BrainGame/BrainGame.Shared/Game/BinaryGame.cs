@@ -38,6 +38,8 @@ namespace BrainGame.Game
 
         public static string GetRank(int value)
         {
+            if (value > 4096)
+                return "Binary God";
             switch (value)
             {
                 default:
@@ -50,6 +52,7 @@ namespace BrainGame.Game
                 case 512: return "Profesional";
                 case 1024: return "Expert";
                 case 2048: return "Ninja";
+                case 4096: return "Extreme Ninja";
             }
         }
 

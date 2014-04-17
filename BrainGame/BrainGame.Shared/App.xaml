@@ -30,6 +30,9 @@
             <SolidColorBrush x:Key="TileBackgroundBrush512" Color="#FF2a89c1"/>
             <SolidColorBrush x:Key="TileBackgroundBrush1024" Color="#FF8dc63f"/>
             <SolidColorBrush x:Key="TileBackgroundBrush2048" Color="#FF31e99f"/>
+            <SolidColorBrush x:Key="TileBackgroundBrush4096" Color="#FFb4ff12"/>
+            <SolidColorBrush x:Key="TileBackgroundBrush8192" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="TileBackgroundBrush16384" Color="#FF000000"/>
 
             <SolidColorBrush x:Key="TileForegroundBrush0" Color="{StaticResource DarkColor}"/>
             <SolidColorBrush x:Key="TileForegroundBrush2" Color="{StaticResource DarkColor}"/>
@@ -43,6 +46,9 @@
             <SolidColorBrush x:Key="TileForegroundBrush512" Color="{StaticResource LightColor}"/>
             <SolidColorBrush x:Key="TileForegroundBrush1024" Color="{StaticResource DarkColor}"/>
             <SolidColorBrush x:Key="TileForegroundBrush2048" Color="{StaticResource DarkColor}"/>
+            <SolidColorBrush x:Key="TileForegroundBrush4096" Color="{StaticResource DarkColor}"/>
+            <SolidColorBrush x:Key="TileForegroundBrush8192" Color="{StaticResource DarkColor}"/>
+            <SolidColorBrush x:Key="TileForegroundBrush16384" Color="{StaticResource LightColor}"/>
 
             <SolidColorBrush x:Key="EmptyBackgroundBrush" Color="#40c0c0c0"/>
 
