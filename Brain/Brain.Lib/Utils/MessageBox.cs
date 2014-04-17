@@ -34,7 +34,7 @@ namespace Brain.Utils
 
         public static async Task<MessageBoxResult> ShowAsync(string messageBoxText)
         {
-            return await ShowAsync(messageBoxText, null, MessageBoxButton.OK);
+            return await ShowAsync(messageBoxText, "", MessageBoxButton.OK);
         }
     }
 

@@ -11,6 +11,9 @@ namespace BrainGame.Game
         public int MoveCount { get; set; }
         public int GameCount { get; set; }
 
+        public string Description { get; set; }
+        public string Rank { get; set; }
+
         public void Reset()
         {
             BestScore = 0;

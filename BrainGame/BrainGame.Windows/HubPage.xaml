@@ -7,14 +7,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:brainGame="using:BrainGame"
+    xmlns:controls="using:BrainGame.Controls"
     mc:Ignorable="d">
 
     <Grid>
+        <!--
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
+        -->
       
         <Hub >
             
@@ -33,6 +36,7 @@
                         Text="binary" 
                         Style="{StaticResource HeaderTextBlockStyle}" 
                         Grid.Column="1" VerticalAlignment="Center" Margin="40,0" />
+                    
                 </Grid>
             </Hub.Header>
             
@@ -66,5 +70,12 @@
             </HubSection>
             
         </Hub>
+
+        <controls:Boxtana 
+                        x:Name="Boxtana"
+                        Width="80" Height="80" Margin="0,20,40,0" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Tapped="Boxtana_Tapped" />
+
     </Grid>
 </brainGame:BasePage>

@@ -69,7 +69,7 @@ namespace BrainGame
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
 
                 // TODO: change this value to a cache size that is appropriate for your application
-                rootFrame.CacheSize = 1;
+                rootFrame.CacheSize = 0;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

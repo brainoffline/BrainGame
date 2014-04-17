@@ -73,6 +73,17 @@
                 <Setter Property="Margin" Value="0,0,0,0"/>
                 <Setter Property="FontSize" Value="48"/>
             </Style>
+            <Style x:Key="StatsRankText" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+            <Style x:Key="StatsScoreText" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="FontSize" Value="36"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
 
 
             <Style x:Key="ClearButtonStyle" TargetType="Button">

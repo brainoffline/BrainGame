@@ -24,7 +24,6 @@
         <m3:InitialRotationPreference>
           <m3:Rotation Preference="portrait" />
         </m3:InitialRotationPreference>
-        <m3:SplashScreen Image="Assets\Logos\SplashScreenImage.png" />
       </m3:VisualElements>
     </Application>
   </Applications>
