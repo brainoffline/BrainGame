@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,6 +18,10 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Brain.Animate;
 using BrainGame.Common;
+
+#if WINDOWS_APP
+using Windows.UI.ApplicationSettings;
+#endif
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -120,6 +125,23 @@ namespace BrainGame
             // Ensure the current window is active
             Window.Current.Activate();
         }
+
+#if WINDOWS_APP
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        {
+            base.OnWindowCreated(args);
+
+            SettingsPane.GetForCurrentView().CommandsRequested += (sender, eventArgs) =>
+            {
+                var privacyCommand = new SettingsCommand("privacy", "Privacy Policy",
+                    async handler =>
+                    {
+                        await Launcher.LaunchUriAsync(new Uri("http://brainoffline.github.io/privacy.html"));
+                    });
+                eventArgs.Request.ApplicationCommands.Add(privacyCommand);
+            };
+        }
+#endif
 
 #if WINDOWS_PHONE_APP
         /// <summary>
