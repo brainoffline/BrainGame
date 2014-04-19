@@ -84,7 +84,7 @@ namespace RateMyApp.Helpers
             }
 
             // Uncomment for testing
-            // State = FeedbackState.FirstReview;
+            //State = FeedbackState.FirstReview;
             //State = FeedbackState.SecondReview;
         }
 
@@ -171,9 +171,9 @@ namespace RateMyApp.Helpers
             }
         }
 
-        public async void Review()
+        public async void Review(string familyPackageName)
         {
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=2a6b272f-8f4d-47db-8559-c9d1fd91bb02"));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=" + familyPackageName));
 
             Reviewed();
         }
