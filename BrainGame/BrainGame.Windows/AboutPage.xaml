@@ -8,22 +8,14 @@
     xmlns:common="using:BrainGame.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animate="using:Brain.Animate"
     mc:Ignorable="d">
 
     <Page.Resources>
         <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
-
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">Binary</x:String>
-
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
 
         <Hub>
             <Hub.Header>
@@ -39,7 +31,7 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                    <TextBlock x:Name="pageTitle" Text="binary" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
@@ -121,6 +113,10 @@
             <HubSection Header="Statistics" Margin="0,0,80,0">
                 <DataTemplate>
                     <ListView ItemsSource="{Binding Games}" SelectionMode="None">
+                        
+                        <animate:ListAnimation.LoadItem>
+                            <animate:BounceAnimation/>
+                        </animate:ListAnimation.LoadItem>
 
                         <ListView.ItemTemplate>
                             <DataTemplate>

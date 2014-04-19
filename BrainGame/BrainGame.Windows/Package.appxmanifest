@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="23236DrDevelop.Binary" Publisher="CN=2C5181F2-C30F-4EA0-A676-61DC3C764E8B" Version="1.1.0.3" />
+  <Identity Name="23236DrDevelop.Binary" Publisher="CN=2C5181F2-C30F-4EA0-A676-61DC3C764E8B" Version="2.0.0.4" />
   <Properties>
     <DisplayName>Binary</DisplayName>
     <PublisherDisplayName>BrainOffline</PublisherDisplayName>

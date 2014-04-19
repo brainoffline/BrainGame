@@ -15,10 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Brain", "Brain", "{F4B7D09B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brain.Lib", "Brain\Brain.Lib\Brain.Lib.csproj", "{537B1376-16FF-4579-B29C-A73F83DA69EC}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RateMyApp.Shared", "Brain\RateMyApp.Shared\RateMyApp.Shared.shproj", "{90072CBF-62EF-4B24-94FF-43F6455F5857}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Brain\RateMyApp.Shared\RateMyApp.Shared.projitems*{90072cbf-62ef-4b24-94ff-43f6455f5857}*SharedItemsImports = 13
 		BrainGame\BrainGame.Shared\BrainGame.Shared.projitems*{bdd646ad-0efa-40bd-89c9-bbcc2d7a9b65}*SharedItemsImports = 13
+		Brain\RateMyApp.Shared\RateMyApp.Shared.projitems*{8096d1db-7b72-498b-bc7f-ece80d725463}*SharedItemsImports = 4
 		BrainGame\BrainGame.Shared\BrainGame.Shared.projitems*{8096d1db-7b72-498b-bc7f-ece80d725463}*SharedItemsImports = 4
+		Brain\RateMyApp.Shared\RateMyApp.Shared.projitems*{8a80ef33-6fb1-488d-9a0c-bd20fb4a3b3d}*SharedItemsImports = 4
 		BrainGame\BrainGame.Shared\BrainGame.Shared.projitems*{8a80ef33-6fb1-488d-9a0c-bd20fb4a3b3d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,5 +100,6 @@ Global
 		{8A80EF33-6FB1-488D-9A0C-BD20FB4A3B3D} = {B7629F1A-C47D-47F9-8467-04AA82A587EC}
 		{8096D1DB-7B72-498B-BC7F-ECE80D725463} = {B7629F1A-C47D-47F9-8467-04AA82A587EC}
 		{537B1376-16FF-4579-B29C-A73F83DA69EC} = {F4B7D09B-5F03-415B-9FE7-157E8C9F78FD}
+		{90072CBF-62EF-4B24-94FF-43F6455F5857} = {F4B7D09B-5F03-415B-9FE7-157E8C9F78FD}
 	EndGlobalSection
 EndGlobal

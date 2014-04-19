@@ -9,6 +9,7 @@
     xmlns:brainGame="using:BrainGame"
     xmlns:controls="using:BrainGame.Controls"
     xmlns:animate="using:Brain.Animate"
+    xmlns:ratemyapp="using:RateMyApp.Controls"
     mc:Ignorable="d">
 
     <Grid>
@@ -76,6 +77,12 @@
                         Foreground="{StaticResource TileBackgroundBrush8}"
                         HorizontalAlignment="Right" VerticalAlignment="Top" 
                         Tapped="Boxtana_Tapped" />
+
+        <ratemyapp:FeedbackOverlay 
+            ApplicationName="binary"
+            FeedbackTo="brian.donovansmith@gmail.com"
+            CompanyName="BrainOffline"
+            />
 
     </Grid>
 </brainGame:BasePage>
