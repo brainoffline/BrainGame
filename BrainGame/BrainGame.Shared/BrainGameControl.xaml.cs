@@ -251,7 +251,7 @@ namespace BrainGame
             if (handler != null) handler(this, achievement);
         }
 
-        private IStorage storage = new DataStorage();
+        private IStorage storage = new SimpleStorage();
 
     }
 }

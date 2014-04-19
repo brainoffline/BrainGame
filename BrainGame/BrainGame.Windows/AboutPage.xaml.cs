@@ -35,7 +35,7 @@ namespace BrainGame
     [ImplementPropertyChanged]
     public sealed partial class AboutPage 
     {
-        private IStorage storage = new DataStorage();
+        private IStorage storage = new SimpleStorage();
         private const string DonationProductId = "Donation";
 
         private Button LikeUsButton { get { return this.Child<Button>("LikeUsButton"); } }
