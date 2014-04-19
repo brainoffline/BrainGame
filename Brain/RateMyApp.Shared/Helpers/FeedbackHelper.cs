@@ -84,7 +84,7 @@ namespace RateMyApp.Helpers
             }
 
             // Uncomment for testing
-             State = FeedbackState.FirstReview;
+            // State = FeedbackState.FirstReview;
             //State = FeedbackState.SecondReview;
         }
 
