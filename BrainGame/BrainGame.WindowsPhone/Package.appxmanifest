@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="cc55208c-ce8a-4d96-853c-b1edb9c7bef5" Publisher="CN=Brian" Version="1.1.0.0" />
-  <mp:PhoneIdentity PhoneProductId="cc55208c-ce8a-4d96-853c-b1edb9c7bef5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="23236DrDevelop.Binary" Publisher="CN=Brian" Version="2.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="ec51f70a-28db-4f24-b7fd-b8da8095f222" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>binary</DisplayName>
     <PublisherDisplayName>BrainOffline</PublisherDisplayName>

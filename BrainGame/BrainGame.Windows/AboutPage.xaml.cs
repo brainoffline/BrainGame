@@ -28,6 +28,7 @@ using BrainGame.Controls;
 using BrainGame.DataModel;
 using BrainGame.Game;
 using PropertyChanged;
+using RateMyApp.Helpers;
 
 namespace BrainGame
 {
@@ -124,8 +125,9 @@ namespace BrainGame
                 "Are you sure you want to clear all scores and achievements?", "Reset Scores", MessageBoxButton.OKCancel);
             if (answer != MessageBoxResult.OK) return;
 
-            // TODO: Reset all data
-            await MessageBox.ShowAsync("TODO: Reset scores");
+            var games = await GameDefinitionSource.LoadDataAsync();
+            foreach (var gameDefinition in games)
+                storage.Delete("GameData." + gameDefinition.UniqueId);
 
             LoadData();
         }
@@ -133,8 +135,8 @@ namespace BrainGame
 
         private async void PleaseRateButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: Rate Us
-            await MessageBox.ShowAsync("TODO: Rate us");
+            StorageHelper.StoreSetting(FeedbackHelper.ReviewedKey, true, true);
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=" + App.FamilyPackageName));
         }
 
         private void DontLikeUsButton_OnClick(object sender, RoutedEventArgs e)

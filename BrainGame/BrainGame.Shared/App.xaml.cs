@@ -32,6 +32,9 @@ namespace BrainGame
     /// </summary>
     public sealed partial class App : Application
     {
+
+        public const string FamilyPackageName = "23236DrDevelop.Binary_03x8wr787bwr6";
+
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif

@@ -37,9 +37,9 @@ namespace RateMyApp.Helpers
     public class FeedbackHelper
     {
         // Constants
-        private const string LaunchCountKey = "RATE_MY_APP_LAUNCH_COUNT";
-        private const string ReviewedKey = "RATE_MY_APP_REVIEWED";
-        private const string LastLaunchDateKey = "RATE_MY_APP_LAST_LAUNCH_DATE";
+        public const string LaunchCountKey = "RATE_MY_APP_LAUNCH_COUNT";
+        public const string ReviewedKey = "RATE_MY_APP_REVIEWED";
+        public const string LastLaunchDateKey = "RATE_MY_APP_LAST_LAUNCH_DATE";
 
         // Members
         public event PropertyChangedEventHandler PropertyChanged;
