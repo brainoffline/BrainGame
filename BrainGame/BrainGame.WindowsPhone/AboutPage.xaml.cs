@@ -134,8 +134,9 @@ namespace BrainGame
         {
             storage.Set(true, "Reviewed");
 
-            await
-                Launcher.LaunchUriAsync(new Uri("http://windowsphone.com/s?appId=72e7243c-9d02-418d-89e8-cd0149d23499"));
+            await Launcher.LaunchUriAsync(CurrentApp.LinkUri);
+
+            // await Launcher.LaunchUriAsync(new Uri("http://windowsphone.com/s?appId=72e7243c-9d02-418d-89e8-cd0149d23499"));
 
             /*
             await Launcher.LaunchUriAsync(new Uri(

@@ -173,8 +173,14 @@ namespace RateMyApp.Helpers
 
         public async void Review()
         {
+#if WINDDOWS_PHONE_APP
+            await Launcher.LaunchUriAsync(CurrentApp.LinkUri);
+#endif
+
+#if WINDOWS_APP
             await Launcher.LaunchUriAsync(new Uri(
                     String.Format("ms-windows-store:Review?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
+#endif
 
             Reviewed();
         }
