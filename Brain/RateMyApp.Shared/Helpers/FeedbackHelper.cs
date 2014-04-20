@@ -171,9 +171,10 @@ namespace RateMyApp.Helpers
             }
         }
 
-        public async void Review(string familyPackageName)
+        public async void Review()
         {
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=" + familyPackageName));
+            await Launcher.LaunchUriAsync(new Uri(
+                    String.Format("ms-windows-store:Review?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
 
             Reviewed();
         }

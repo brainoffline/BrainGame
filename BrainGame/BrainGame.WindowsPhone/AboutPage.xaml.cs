@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -132,7 +133,14 @@ namespace BrainGame
         private async void PleaseRateButton_OnClick(object sender, RoutedEventArgs e)
         {
             storage.Set(true, "Reviewed");
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=" + App.FamilyPackageName));
+
+            await
+                Launcher.LaunchUriAsync(new Uri("http://windowsphone.com/s?appId=72e7243c-9d02-418d-89e8-cd0149d23499"));
+
+            /*
+            await Launcher.LaunchUriAsync(new Uri(
+                String.Format("ms-windows-store:Review?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
+            */
         }
 
         private void DontLikeUsButton_OnClick(object sender, RoutedEventArgs e)

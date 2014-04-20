@@ -374,28 +374,6 @@ namespace RateMyApp.Controls
         #endregion
 
 
-        // Use this from XAML to control company name 
-        #region FamilyPackageName Dependency Property
-
-        public static readonly DependencyProperty FamilyPackageNameProperty =
-            DependencyProperty.Register(
-                "FamilyPackageName", typeof(string), typeof(FeedbackOverlay),
-                new PropertyMetadata(null, null));
-
-        public static void SetFamilyPackageName(FeedbackOverlay element, string value)
-        {
-            element.SetValue(FamilyPackageNameProperty, value);
-        }
-
-        public static string GetFamilyPackageName(FeedbackOverlay element)
-        {
-            return (string)element.GetValue(FamilyPackageNameProperty);
-        }
-
-        #endregion
-
-
-
 
         // Use this from XAML to control application name 
         #region ApplicationName Dependency Property
@@ -791,7 +769,7 @@ namespace RateMyApp.Controls
         /// </summary>
         private void Review()
         {
-            FeedbackHelper.Default.Review(GetFamilyPackageName(this));
+            FeedbackHelper.Default.Review();
         }
 
 

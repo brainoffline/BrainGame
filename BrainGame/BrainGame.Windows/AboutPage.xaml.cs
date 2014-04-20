@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Graphics.Display;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Xaml.Media.Animation;
 using Brain.Animate;
 using Brain.Extensions;
@@ -140,7 +141,9 @@ namespace BrainGame
         private async void PleaseRateButton_OnClick(object sender, RoutedEventArgs e)
         {
             storage.Set(true, "Reviewed");
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=" + App.FamilyPackageName));
+
+            await Launcher.LaunchUriAsync(new Uri(
+                String.Format("ms-windows-store:Review?PFN={0}", Windows.ApplicationModel.Package.Current.Id.FamilyName)));
         }
 
         private void DontLikeUsButton_OnClick(object sender, RoutedEventArgs e)
