@@ -40,12 +40,12 @@
                 </Grid>
             </Hub.Header>
             
-            <HubSection x:Uid="GamesSection" Padding="40,40,40,32">
+            <HubSection x:Uid="GamesSection" Padding="40,40,40,32" Margin="120,0,0,0">
                 <DataTemplate>
                     <GridView
                         x:Name="GamesGridView"
                         ItemsSource="{Binding Games}"
-                        Margin="-9,-14,0,0"
+                        Margin="0,-14,0,0"
                         SelectionMode="None"
                         IsSwipeEnabled="false"
                         IsItemClickEnabled="True"
@@ -78,12 +78,14 @@
                         HorizontalAlignment="Right" VerticalAlignment="Top" 
                         Tapped="Boxtana_Tapped" />
 
+        <!--
         <ratemyapp:FeedbackOverlay 
             ApplicationName="binary"
             FeedbackTo="brian.donovansmith@gmail.com"
             CompanyName="BrainOffline"
             FamilyPackageName="23236DrDevelop.Binary_03x8wr787bwr6"
             />
+        -->
 
     </Grid>
 </brainGame:BasePage>

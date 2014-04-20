@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Graphics.Display;
@@ -28,7 +30,6 @@ using BrainGame.Controls;
 using BrainGame.DataModel;
 using BrainGame.Game;
 using PropertyChanged;
-using RateMyApp.Helpers;
 
 namespace BrainGame
 {
@@ -36,7 +37,7 @@ namespace BrainGame
     public sealed partial class AboutPage 
     {
         private IStorage storage = new SimpleStorage();
-        private const string DonationProductId = "Donation";
+        private const string DonationProductId = "Donation2";
 
         private Button LikeUsButton { get { return this.Child<Button>("LikeUsButton"); } }
         private Button DontLikeUsButton { get { return this.Child<Button>("DontLikeUsButton"); } }
@@ -56,6 +57,8 @@ namespace BrainGame
         {
             base.OnNavigatedTo(e);
             LoadData();
+
+            DonationText = "Donate";
 
             Task.Run(async () =>
             {
@@ -90,9 +93,10 @@ namespace BrainGame
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     // Do Nothing
+                    Debug.WriteLine(ex.ToString());
                 }
             });
 
@@ -135,7 +139,7 @@ namespace BrainGame
 
         private async void PleaseRateButton_OnClick(object sender, RoutedEventArgs e)
         {
-            StorageHelper.StoreSetting(FeedbackHelper.ReviewedKey, true, true);
+            storage.Set(true, "Reviewed");
             await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:REVIEW?PFN=" + App.FamilyPackageName));
         }
 

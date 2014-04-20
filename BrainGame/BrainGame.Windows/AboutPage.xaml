@@ -66,7 +66,7 @@
 									        Style="{StaticResource ClearButtonStyle}" 
                                             Background="{StaticResource TileBackgroundBrush128}" Opacity="0">
                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-										        <Run Text="Please rate us 5 "/>
+										        <Run Text="rate us 5 "/>
 										        <Run FontSize="21.333" Text="★" Foreground="Yellow"/>
 										        <Run Text="'s"/>
                                         </TextBlock>
@@ -79,7 +79,7 @@
                                             Background="{StaticResource TileBackgroundBrush4}">
                                         <TextBlock 
                                                 Text="{Binding DonationText}" 
-                                                HorizontalAlignment="Center"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                                 Foreground="Black"/>
                                     </Button>
                                     <Button 

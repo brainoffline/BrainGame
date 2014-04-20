@@ -21,9 +21,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Brain\RateMyApp.Shared\RateMyApp.Shared.projitems*{90072cbf-62ef-4b24-94ff-43f6455f5857}*SharedItemsImports = 13
 		BrainGame\BrainGame.Shared\BrainGame.Shared.projitems*{bdd646ad-0efa-40bd-89c9-bbcc2d7a9b65}*SharedItemsImports = 13
-		Brain\RateMyApp.Shared\RateMyApp.Shared.projitems*{8096d1db-7b72-498b-bc7f-ece80d725463}*SharedItemsImports = 4
 		BrainGame\BrainGame.Shared\BrainGame.Shared.projitems*{8096d1db-7b72-498b-bc7f-ece80d725463}*SharedItemsImports = 4
-		Brain\RateMyApp.Shared\RateMyApp.Shared.projitems*{8a80ef33-6fb1-488d-9a0c-bd20fb4a3b3d}*SharedItemsImports = 4
 		BrainGame\BrainGame.Shared\BrainGame.Shared.projitems*{8a80ef33-6fb1-488d-9a0c-bd20fb4a3b3d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
