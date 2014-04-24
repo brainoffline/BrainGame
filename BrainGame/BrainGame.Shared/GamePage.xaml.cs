@@ -7,7 +7,9 @@ using GoogleAnalytics;
 #endif
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Store;
 using Windows.System;
@@ -105,13 +107,14 @@ namespace BrainGame
             bc.SaveData();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             if (bc.Game == null)
             {
-                var gameDefinition = (GameDefinition) e.Parameter;
+                var games = await GameDefinitionSource.LoadDataAsync();
+                var gameDefinition = games.FirstOrDefault(g => g.UniqueId == (string)e.Parameter);
                 if (gameDefinition == null) return;
 
                 bc.Build(gameDefinition);
@@ -155,12 +158,22 @@ namespace BrainGame
             DataTransferManager.GetForCurrentView().DataRequested += DataTransferManagerOnDataRequested;
 
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
+            Window.Current.VisibilityChanged += OnVisibilityChanged;
         }
+
+        private void OnVisibilityChanged(object sender, VisibilityChangedEventArgs args)
+        {
+            if (!args.Visible)
+                bc.SaveData();
+        }
+
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            Window.Current.VisibilityChanged -= OnVisibilityChanged;
             DataTransferManager.GetForCurrentView().DataRequested -= DataTransferManagerOnDataRequested;
             Window.Current.CoreWindow.KeyUp -= CoreWindow_KeyUp;
+
             bc.SaveData();
 
             base.OnNavigatedFrom(e);

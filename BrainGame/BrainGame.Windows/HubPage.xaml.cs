@@ -27,7 +27,7 @@ namespace BrainGame
             Loaded += async (sender, args) =>
             {
                 await Task.Delay(800);
-                if (!triggered) await Boxtana.Do(BoxtanaAction.Entrance1);
+                if (!triggered) await Boxtana.Do(BoxtanaAction.Entrance);
                 if (!triggered) await Task.Delay(500);
                 if (triggered) return;
                 while (!triggered)
@@ -60,19 +60,19 @@ namespace BrainGame
             await Task.WhenAll(new[]
             {
                 AnimationTrigger.AnimateClose(),
-                Boxtana.Do(BoxtanaAction.Exit1),
+                Boxtana.Do(BoxtanaAction.Exit),
                 gamesGridView.AnimateItems(
                     new BounceOutDownAnimation(), 0.05, 
                     gameDefinition, 
                     new ExpandAnimation { Duration = 0.8, FinalScale = 1.1 })
             });
 
-            Frame.Navigate(typeof(GamePage), gameDefinition);
+            Frame.Navigate(typeof(GamePage), gameDefinition.UniqueId);
         }
 
         private async void Boxtana_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            await Boxtana.Do(BoxtanaAction.Exit1);
+            await Boxtana.Do(BoxtanaAction.Exit);
             Frame.Navigate(typeof(AboutPage));
         }
 

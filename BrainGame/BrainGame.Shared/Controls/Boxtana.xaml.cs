@@ -25,19 +25,22 @@ namespace BrainGame.Controls
 {
     public enum BoxtanaAction
     {
-        Entrance1,
+        Entrance,
 
         RandomWait,
 
-        Swing1,
-        Color1,
-        Jump1,
+        Swing,
+        Color,
+        Jump,
 
-        Rotation1,
-        Rotation2,
-        Pulse1,
+        RotateRight,
+        RotateLeft,
+        Pulse,
 
-        Exit1,
+        Abashed,
+        Thinking,
+
+        Exit,
     }
 
     public sealed partial class Boxtana
@@ -68,35 +71,43 @@ namespace BrainGame.Controls
                 await Task.WhenAll(tasks);
                 AnimationManager.StopAnimations(InnerGrid);
                 AnimationManager.StopAnimations(OuterGrid);
+                AnimationManager.StopAnimations(Inner);
+                AnimationManager.StopAnimations(Outer);
             }
 
             switch (boxtanaAction)
             {
-                case BoxtanaAction.Entrance1: 
+                case BoxtanaAction.Entrance: 
                     await Entrance1();
                     break;
-                case BoxtanaAction.Exit1: 
+                case BoxtanaAction.Exit: 
                     await Exit1();
+                    break;
+                case BoxtanaAction.Abashed:
+                    await Abashed1();
+                    break;
+                case BoxtanaAction.Thinking:
+                    await Thinking1();
                     break;
                 case BoxtanaAction.RandomWait:
                     await RandomWait(3);
                     break;
-                case BoxtanaAction.Swing1:
+                case BoxtanaAction.Swing:
                     await Swing1();
                     break;
-                case BoxtanaAction.Rotation1:
+                case BoxtanaAction.RotateRight:
                     await Rotation(true);
                     break;
-                case BoxtanaAction.Rotation2:
+                case BoxtanaAction.RotateLeft:
                     await Rotation(false);
                     break;
-                case BoxtanaAction.Pulse1:
+                case BoxtanaAction.Pulse:
                     await Pulse();
                     break;
-                case BoxtanaAction.Color1:
+                case BoxtanaAction.Color:
                     await Color1();
                     break;
-                case BoxtanaAction.Jump1:
+                case BoxtanaAction.Jump:
                     await Jump();
                     break;
             }
@@ -139,6 +150,32 @@ namespace BrainGame.Controls
             await Task.WhenAll(tasks);
         }
 
+        private async Task Abashed1()
+        {
+            var tasks = new Task[]
+            {
+                OuterGrid.AnimateAsync(new FlipXAnimation { From = 0.0, To = 240, Duration = 1}),
+                InnerGrid.AnimateAsync(new FlipXAnimation { From = 0.0, To = 120, Duration = 1}),
+            };
+            await Task.WhenAll(tasks);
+            tasks = new Task[]
+            {
+                OuterGrid.AnimateAsync(new FlipXAnimation { From = 240, To = 0, Duration = 0.3}),
+                InnerGrid.AnimateAsync(new FlipXAnimation { From = 120, To = 0, Duration = 0.3}),
+            };
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task Thinking1()
+        {
+            var tasks = new Task[]
+            {
+                OuterGrid.AnimateAsync(new FlipYAnimation { From = 0.0, To = 180, Duration = 0.4, Delay = 0.1}),
+                InnerGrid.AnimateAsync(new FlipYAnimation { From = 0.0, To = 180, Duration = 0.5}),
+            };
+            await Task.WhenAll(tasks);
+        }
+
         private async Task Swing1()
         {
             var tasks = new Task[]
@@ -165,8 +202,8 @@ namespace BrainGame.Controls
             bool forever = repeatCount < 0;
             var tasks = new Task[]
             {
-                Outer.AnimateAsync(new LinePulseAnimation { Duration = 7, Forever = forever, RepeatCount = repeatCount}),
-                InnerGrid.AnimateAsync(new SizePulseAnimation { Duration = 7, Reverse = true, Forever = forever, RepeatCount = repeatCount}),
+                Outer.AnimateAsync(new LinePulseAnimation { Duration = 5, Forever = forever, RepeatCount = repeatCount}),
+                InnerGrid.AnimateAsync(new SizePulseAnimation { Duration = 5, Reverse = true, Forever = forever, RepeatCount = repeatCount}),
             };
             await Task.WhenAll(tasks);
         }
@@ -352,6 +389,61 @@ namespace BrainGame.Controls
         }
     }
 
+    public class FlipXAnimation : AnimationDefinition
+    {
+        public FlipXAnimation()
+        {
+            Centre = 0.5;
+            From = 0.0;
+            To = 180.0;
+        }
+
+        public Double Centre { get; set; }
+        public Double From { get; set; }
+        public Double To { get; set; }
+
+
+        public override IEnumerable<Timeline> CreateAnimation(FrameworkElement element)
+        {
+            var list = new List<Timeline>
+            {
+                element.AnimateProperty(AnimationProperty.CentreOfRotationY)
+                    .AddDiscreteKeyFrame(0.0, Centre),
+                element.AnimateProperty(AnimationProperty.RotationX)
+                    .AddEasingKeyFrame(0.0, From)
+                    .AddEasingKeyFrame(Duration, To, new QuadraticEase() )
+            };
+            return list;
+        }
+    }
+
+    public class FlipYAnimation : AnimationDefinition
+    {
+        public FlipYAnimation()
+        {
+            Centre = 0.5;
+            From = 0.0;
+            To = 180.0;
+        }
+
+        public Double Centre { get; set; }
+        public Double From { get; set; }
+        public Double To { get; set; }
+
+
+        public override IEnumerable<Timeline> CreateAnimation(FrameworkElement element)
+        {
+            var list = new List<Timeline>
+            {
+                element.AnimateProperty(AnimationProperty.CentreOfRotationX)
+                    .AddDiscreteKeyFrame(0.0, Centre),
+                element.AnimateProperty(AnimationProperty.RotationY)
+                    .AddEasingKeyFrame(0.0, From)
+                    .AddEasingKeyFrame(Duration, To, new QuadraticEase() )
+            };
+            return list;
+        }
+    }
 
 
 }

@@ -278,5 +278,10 @@ namespace BrainGame
 
         public ObservableCollection<GameData> Games { get; set; }
 
+        private void Logo_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (TestBoxPage));
+        }
+
     }
 }

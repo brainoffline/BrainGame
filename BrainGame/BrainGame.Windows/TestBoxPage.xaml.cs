@@ -33,24 +33,24 @@ namespace BrainGame
 
         private async void Boxtana_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            await Boxtana.Do(BoxtanaAction.Exit1);
+            await Boxtana.Do(BoxtanaAction.Exit);
             await Task.Delay(500);
-            await Boxtana.Do(BoxtanaAction.Entrance1);
+            await Boxtana.Do(BoxtanaAction.Entrance);
         }
 
         private async void One_OnClick(object sender, RoutedEventArgs e)
         {
-            await Boxtana.Do(BoxtanaAction.Swing1);
+            await Boxtana.Do(BoxtanaAction.Swing);
         }
 
         private async void Two_OnClick(object sender, RoutedEventArgs e)
         {
-            await Boxtana.Do(BoxtanaAction.Rotation1);
+            await Boxtana.Do(BoxtanaAction.RotateRight);
         }
 
         private async void Three_OnClick(object sender, RoutedEventArgs e)
         {
-            await Boxtana.Do(BoxtanaAction.Color1);
+            await Boxtana.Do(BoxtanaAction.Color);
         }
     }
 }

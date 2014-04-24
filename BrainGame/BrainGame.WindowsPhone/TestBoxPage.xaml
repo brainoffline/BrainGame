@@ -9,44 +9,48 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:BrainGame.Controls"
     mc:Ignorable="d">
-    
+
     <local:BasePage.BottomAppBar>
         <CommandBar>
-            <AppBarButton Click="One_OnClick" ><AppBarButton.Icon><FontIcon Glyph="1"/></AppBarButton.Icon></AppBarButton>
-            <AppBarButton Click="Two_OnClick" ><AppBarButton.Icon><FontIcon Glyph="2"/></AppBarButton.Icon></AppBarButton>
-            <AppBarButton Click="Three_OnClick" ><AppBarButton.Icon><FontIcon Glyph="3"/></AppBarButton.Icon></AppBarButton>
+            <AppBarButton Click="One_OnClick" >
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="1"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Click="Two_OnClick" >
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="2"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Click="Three_OnClick" >
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="3"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
         </CommandBar>
     </local:BasePage.BottomAppBar>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid>
 
-        <Grid Grid.Row="1">
-            
-            <controls:Boxtana 
-                x:Name="Boxtana"
-                Margin="40" Foreground="Aquamarine" 
-                Tapped="Boxtana_OnTapped"
-                />
-            
-        </Grid>
+        <controls:Boxtana 
+            x:Name="Boxtana"
+            Margin="40" 
+            Tapped="Boxtana_OnTapped" 
+            Foreground="{StaticResource PhoneAccentBrush}"
+            />
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-        </Grid>
+        <ComboBox x:Name="combo" SelectionChanged="Selector_OnSelectionChanged" VerticalAlignment="Top" Margin="24,0">
+            <ComboBoxItem Content="Abashed"/>
+            <ComboBoxItem Content="Entrance"/>
+            <ComboBoxItem Content="Exit"/>
+            <ComboBoxItem Content="Color"/>
+            <ComboBoxItem Content="Swing"/>
+            <ComboBoxItem Content="Thinking"/>
+            <ComboBoxItem Content="Jump"/>
+            <ComboBoxItem Content="RotateRight"/>
+            <ComboBoxItem Content="RotateLeft"/>
+            <ComboBoxItem Content="Pulse"/>
+        </ComboBox>
+
     </Grid>
 </local:BasePage>
