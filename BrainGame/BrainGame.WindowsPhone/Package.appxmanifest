@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="23236DrDevelop.Binary" Publisher="CN=2C5181F2-C30F-4EA0-A676-61DC3C764E8B" Version="2.0.3.4" />
+  <Identity Name="23236DrDevelop.Binary" Publisher="CN=2C5181F2-C30F-4EA0-A676-61DC3C764E8B" Version="2.0.4.5" />
   <mp:PhoneIdentity PhoneProductId="72e7243c-9d02-418d-89e8-cd0149d23499" PhonePublisherId="2C5181F2-C30F-4EA0-A676-61DC3C764E8B" />
   <Properties>
     <DisplayName>Binary</DisplayName>
