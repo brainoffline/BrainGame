@@ -40,11 +40,12 @@ namespace BrainGame.Game
                         case 64: return "F";
                         case 128: return "G";
                         case 256: return "H";
-                        case 1024: return "I";
-                        case 2048: return "J";
-                        case 4096: return "K";
-                        case 8192: return "L";
-                        case 16384: return "M";
+                        case 512: return "I";
+                        case 1024: return "J";
+                        case 2048: return "K";
+                        case 4096: return "L";
+                        case 8192: return "M";
+                        case 16384: return "N";
                         default:
                             break;
                     }
