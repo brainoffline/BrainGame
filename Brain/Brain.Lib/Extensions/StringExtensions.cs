@@ -14,30 +14,38 @@ namespace Brain.Extensions
 {
     public static class StringExtensions
     {
-        public static Brush ToColorBrush(this string text)
+        public static Color ToColor(this string text)
         {
             if (string.IsNullOrWhiteSpace(text))
-                return default(Brush);
+                return Colors.Transparent;
 
             text = text.Replace("#", "")
-                       .Replace(";", "");
+           .Replace(";", "");
 
             if (text.Length == 6)
             {
                 byte r = Convert.ToByte(text.Substring(0, 2), 16);
                 byte g = Convert.ToByte(text.Substring(2, 2), 16);
                 byte b = Convert.ToByte(text.Substring(4, 2), 16);
-                return new SolidColorBrush(Color.FromArgb(255, r, g, b));
+                return Color.FromArgb(255, r, g, b);
             }
-            else if (text.Length == 8)
+            if (text.Length == 8)
             {
                 byte a = Convert.ToByte(text.Substring(0, 2), 16);
                 byte r = Convert.ToByte(text.Substring(2, 2), 16);
                 byte g = Convert.ToByte(text.Substring(4, 2), 16);
                 byte b = Convert.ToByte(text.Substring(6, 2), 16);
-                return new SolidColorBrush(Color.FromArgb(a, r, g, b));
+                return Color.FromArgb(a, r, g, b);
             }
-            return default(Brush);
+            return Colors.Transparent;
+        }
+
+        public static Brush ToColorBrush(this string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return default(Brush);
+
+            return new SolidColorBrush(ToColor(text));
         }
 
         public static string Reverse(this string s)

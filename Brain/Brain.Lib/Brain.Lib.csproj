@@ -63,6 +63,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.2\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NotificationsExtensions">
+      <HintPath>..\..\..\GoJump\packages\NotificationsExtensions.Portable.1.0.3\lib\NotificationsExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

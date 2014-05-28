@@ -18,12 +18,9 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Brain.Animate;
 using BrainGame.Common;
-
 #if WINDOWS_APP
 using Windows.UI.ApplicationSettings;
 #endif
-
-// The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
 namespace BrainGame
 {
